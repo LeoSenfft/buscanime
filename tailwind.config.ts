@@ -14,6 +14,7 @@ export default {
     extend: {
       colors: {
         primary: "var(--primary)",
+        primaryLight: "var(--primary-light)",
         warning: "var(--warning)",
         danger: "var(--danger)",
         success: "var(--success)",
@@ -21,7 +22,11 @@ export default {
         foreground: "var(--foreground)",
       },
       gridTemplateColumns: {
-        cards: "repeat( auto-fit, minmax(19.8125rem, 1fr) )",
+        cards: "repeat( auto-fit, minmax(17.5rem, 1fr) )",
+      },
+      backgroundImage: {
+        "card-mask":
+          "linear-gradient(180.22deg, rgba(0, 0, 0, 0.85) 0.19%, rgba(0, 0, 0, 0.17) 105.04%)",
       },
     },
   },

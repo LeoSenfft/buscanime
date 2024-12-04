@@ -1,14 +1,25 @@
 "use client";
 
 import Card from "@/components/Card";
-import { TopBar } from "@/components/Search/TopBar";
+import { Filter } from "@/components/Search/Filter";
+import { SearchForm } from "@/components/Search/SearchForm";
+import useGetAllSearchParams from "@/hooks/useGetAllSearchParams";
+import type { Media } from "@/types/Media";
 import { gql, useQuery } from "@apollo/client";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 
 const GET_ANIMES = gql`
-  query Media($perPage: Int, $sort: [MediaSort], $page: Int) {
+  query Media($perPage: Int, $search: String, $sort: [MediaSort], $page: Int) {
     Page(perPage: $perPage, page: $page) {
-      media(sort: $sort) {
+      media(search: $search, sort: $sort) {
+        averageScore
+        bannerImage
+        coverImage {
+          large
+          color
+        }
+        id
+        genres
         title {
           userPreferred
         }
@@ -18,9 +29,10 @@ const GET_ANIMES = gql`
 `;
 export default function Home() {
   const [page, setPage] = useState(1);
+  const { allParams } = useGetAllSearchParams();
 
   const { data, loading, error, fetchMore } = useQuery(GET_ANIMES, {
-    variables: { perPage: 20, sort: "ID" },
+    variables: { perPage: 20, sort: "ID", search: allParams.s === "" ? null : allParams.s },
     notifyOnNetworkStatusChange: true,
   });
 
@@ -41,38 +53,40 @@ export default function Home() {
     });
   }, [page]);
 
-  function handleOnSearch(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(e);
-  }
-
   return (
-    <div className="Home">
-      <TopBar />
+    <div className="Home flex flex-col gap-6">
+      <Filter />
 
-      {error && <div className="text-danger">Ocorreu um error ao buscar os dados!</div>}
+      <SearchForm />
+
+      {error && <div className="text-danger text-center">Ocorreu um error ao buscar os dados!</div>}
 
       {data && (
         <div className="grid grid-cols-cards gap-x-4 gap-y-[1.3125rem]">
-          {data?.Page?.media?.map((item: any, index: number) => (
-            <div key={index}>{item.title.userPreferred}</div>
+          {data?.Page?.media?.map((media: Media) => (
+            <Card
+              key={media.id}
+              title={media.title.userPreferred}
+              categories={media.genres}
+              averageScore={media.averageScore}
+              imageSrc={media.coverImage?.large ?? ""}
+            />
           ))}
-          {/* <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card /> */}
         </div>
       )}
 
-      {loading && <div>carregando...</div>}
+      {!error && !loading && data.Page.media.length === 0 && (
+        <div className="text-center">Nenhum resultado encontrado</div>
+      )}
 
-      <button type="button" onClick={() => setPage((prev) => prev + 1)}>
-        Ver mais
+      {loading && <div className="text-center">Carregando...</div>}
+
+      <button
+        className="bg-warning w-full py-3 px-2 rounded-lg text-white font-semibold text-xl"
+        type="button"
+        onClick={() => setPage((prev) => prev + 1)}
+      >
+        + Ver mais
       </button>
     </div>
   );

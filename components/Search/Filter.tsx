@@ -11,15 +11,56 @@ export function Filter() {
   const { createQueryString } = useQueryString();
 
   return (
-    <div className="Filter flex content-center">
-      <Link href={`/${pathname + "?" + createQueryString("type", "")}`}>All Formats</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "TV Show")}`}>TV Show</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "Movie")}`}>Movie</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "TV Short")}`}>TV Short</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "Special")}`}>Special</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "OVA")}`}>OVA</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "ONA")}`}>ONA</Link>
-      <Link href={`/${pathname + "?" + createQueryString("type", "Music")}`}>Music</Link>
+    <div className="Filter flex flex-wrap justify-center gap-5 text-sm">
+      <Link
+        className="btn-primary-outline btn-primary-outline--active"
+        href={`/${pathname + "?" + createQueryString("type", "")}`}
+      >
+        All Formats
+      </Link>
+
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "TV Show")}`}
+      >
+        TV Show
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "Movie")}`}
+      >
+        Movie
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "TV Short")}`}
+      >
+        TV Short
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "Special")}`}
+      >
+        Special
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "OVA")}`}
+      >
+        OVA
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "ONA")}`}
+      >
+        ONA
+      </Link>
+      <Link
+        className="btn-primary-outline"
+        href={`/${pathname + "?" + createQueryString("type", "Music")}`}
+      >
+        Music
+      </Link>
     </div>
   );
 }

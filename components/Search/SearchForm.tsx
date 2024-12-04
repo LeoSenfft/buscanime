@@ -21,16 +21,19 @@ export function SearchForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="flex gap-2 text-sm" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Digite algo aqui..."
         name="busca"
         defaultValue={inputValue}
         onChange={(event) => setInputValue(event.target.value)}
+        className="w-full"
       />
 
-      <button type="submit">Buscar</button>
+      <button className="btn-primary fle-xnone" type="submit">
+        Buscar
+      </button>
     </form>
   );
 }

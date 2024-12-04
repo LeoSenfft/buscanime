@@ -4,6 +4,7 @@
 
 :root {
   --primary: #6324c6;
+  --primary-light: #774dc5;
   --warning: #ffb800;
   --success: #01ada6;
   --danger: #e92151;
@@ -30,4 +31,22 @@ body {
   max-width: calc(82.5rem + (var(--padding-inline) * 2));
   margin-inline: auto;
   padding-inline: var(--padding-inline);
+}
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-5 bg-primary rounded text-white font-semibold;
+  }
+
+  .btn-primary-outline {
+    @apply py-2 px-5 border border-primary bg-white rounded text-primary font-semibold hover:bg-primary hover:text-white transition-all;
+  }
+
+  .btn-primary-outline--active {
+    @apply bg-primary text-white;
+  }
+}
+
+input {
+  @apply border p-[0.625rem] rounded;
 }
