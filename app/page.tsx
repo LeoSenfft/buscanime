@@ -8,6 +8,7 @@ import { GET_ANIMES } from "@/services/getAnimes";
 import type { Media } from "@/types/Media";
 import { FormatMediaMap } from "@/utils/getFormatMediaValues";
 import { useQuery } from "@apollo/client";
+import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 
 function PageContent() {
@@ -42,7 +43,7 @@ function PageContent() {
   }, [page]);
 
   return (
-    <div className="Home flex flex-col gap-6">
+    <div className="Home container-full flex flex-col gap-6 py-6">
       <Filter />
 
       <SearchForm />
@@ -50,13 +51,14 @@ function PageContent() {
       {data && (
         <div className="grid grid-cols-cards gap-x-4 gap-y-[1.3125rem]">
           {data.Page?.media?.map((media: Media) => (
-            <Card
-              key={media.id}
-              title={media.title.userPreferred}
-              categories={media.genres}
-              averageScore={media.averageScore}
-              imageSrc={media.coverImage?.large ?? ""}
-            />
+            <Link href={`/anime/${media.id}`} key={media.id}>
+              <Card
+                title={media.title.userPreferred}
+                categories={media.genres}
+                averageScore={media.averageScore}
+                imageSrc={media.coverImage?.large ?? ""}
+              />
+            </Link>
           ))}
         </div>
       )}

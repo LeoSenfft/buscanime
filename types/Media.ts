@@ -26,4 +26,5 @@ export type Media = {
   id: number;
   genres?: Array<string>;
   title: MediaTitle;
+  description?: string;
 };

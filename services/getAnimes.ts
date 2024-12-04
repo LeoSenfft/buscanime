@@ -25,3 +25,21 @@ export const GET_ANIMES = gql`
     }
   }
 `;
+
+export const GET_ANIME_BY_ID = gql`
+  query Query($mediaId: Int) {
+    Media(id: $mediaId) {
+      id
+      genres
+      format
+      bannerImage
+      coverImage {
+        large
+      }
+      title {
+        userPreferred
+      }
+      description
+    }
+  }
+`;

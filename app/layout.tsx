@@ -23,7 +23,7 @@ export default function RootLayout({
         <body className={`${mulish.className} antialiased flex flex-col min-h-dvh content-between`}>
           <Header />
 
-          <div className="container-full py-6">{children}</div>
+          {children}
 
           <Footer />
         </body>
