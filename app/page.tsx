@@ -6,7 +6,7 @@ import { SearchForm } from "@/components/Search/SearchForm";
 import useGetAllSearchParams from "@/hooks/useGetAllSearchParams";
 import type { Media } from "@/types/Media";
 import { gql, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const GET_ANIMES = gql`
   query Media($perPage: Int, $search: String, $sort: [MediaSort], $page: Int) {
@@ -27,7 +27,8 @@ const GET_ANIMES = gql`
     }
   }
 `;
-export default function Home() {
+
+function PageContent() {
   const [page, setPage] = useState(1);
   const { allParams } = useGetAllSearchParams();
 
@@ -89,5 +90,13 @@ export default function Home() {
         + Ver mais
       </button>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <PageContent />
+    </Suspense>
   );
 }
