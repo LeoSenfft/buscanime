@@ -22,7 +22,7 @@ export default {
         foreground: "var(--foreground)",
       },
       gridTemplateColumns: {
-        cards: "repeat( auto-fit, minmax(17.5rem, 1fr) )",
+        cards: "repeat( auto-fill, minmax(17.5rem, 1fr) )",
       },
       backgroundImage: {
         "card-mask":

@@ -1,7 +1,7 @@
 "use client";
 
 import useGetAllSearchParams from "@/hooks/useGetAllSearchParams";
-import React, { useState, type FormEvent } from "react";
+import React, { useEffect, useState, type FormEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import useQueryString from "@/hooks/useQueryString";
 
@@ -19,6 +19,10 @@ export function SearchForm() {
 
     router.push(pathname + "?" + createQueryString("s", inputValue));
   }
+
+  useEffect(() => {
+    setInputValue(allParams.s);
+  }, [allParams.s]);
 
   return (
     <form className="flex gap-2 text-sm" onSubmit={handleSubmit}>

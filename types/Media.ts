@@ -7,6 +7,18 @@ export type MediaTitle = {
   userPreferred: string;
 };
 
+export type FormatMedia =
+  | "TV"
+  | "TV_SHORT"
+  | "MOVIE"
+  | "SPECIAL"
+  | "OVA"
+  | "ONA"
+  | "MUSIC"
+  | "MANGA"
+  | "NOVEL"
+  | "ONE_SHOT";
+
 export type Media = {
   averageScore?: number;
   bannerImage?: string;

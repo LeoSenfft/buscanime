@@ -4,36 +4,23 @@ import Card from "@/components/Card";
 import { Filter } from "@/components/Search/Filter";
 import { SearchForm } from "@/components/Search/SearchForm";
 import useGetAllSearchParams from "@/hooks/useGetAllSearchParams";
+import { GET_ANIMES } from "@/services/getAnimes";
 import type { Media } from "@/types/Media";
-import { gql, useQuery } from "@apollo/client";
+import { FormatMediaMap } from "@/utils/getFormatMediaValues";
+import { useQuery } from "@apollo/client";
 import { Suspense, useEffect, useState } from "react";
-
-const GET_ANIMES = gql`
-  query Media($perPage: Int, $search: String, $sort: [MediaSort], $page: Int) {
-    Page(perPage: $perPage, page: $page) {
-      media(search: $search, sort: $sort) {
-        averageScore
-        bannerImage
-        coverImage {
-          large
-          color
-        }
-        id
-        genres
-        title {
-          userPreferred
-        }
-      }
-    }
-  }
-`;
 
 function PageContent() {
   const [page, setPage] = useState(1);
   const { allParams } = useGetAllSearchParams();
 
   const { data, loading, error, fetchMore } = useQuery(GET_ANIMES, {
-    variables: { perPage: 20, sort: "ID", search: allParams.s === "" ? null : allParams.s },
+    variables: {
+      perPage: 20,
+      sort: "ID",
+      search: allParams.s === "" ? undefined : allParams.s,
+      format: allParams.format === "" ? undefined : FormatMediaMap.get(allParams.format),
+    },
     notifyOnNetworkStatusChange: true,
   });
 
@@ -60,11 +47,9 @@ function PageContent() {
 
       <SearchForm />
 
-      {error && <div className="text-danger text-center">Ocorreu um error ao buscar os dados!</div>}
-
       {data && (
         <div className="grid grid-cols-cards gap-x-4 gap-y-[1.3125rem]">
-          {data?.Page?.media?.map((media: Media) => (
+          {data.Page?.media?.map((media: Media) => (
             <Card
               key={media.id}
               title={media.title.userPreferred}
@@ -75,6 +60,8 @@ function PageContent() {
           ))}
         </div>
       )}
+
+      {error && <div className="text-danger text-center">Ocorreu um error ao buscar os dados!</div>}
 
       {!error && !loading && data.Page.media.length === 0 && (
         <div className="text-center">Nenhum resultado encontrado</div>
