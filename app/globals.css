@@ -12,12 +12,17 @@
   --foreground: #171717;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  color-scheme: "dark";
+
+  input {
+    background-color: var(--background);
+    border-color: #555;
   }
-} */
+}
 
 body {
   color: var(--foreground);
@@ -39,7 +44,7 @@ body {
   }
 
   .btn-primary-outline {
-    @apply py-2 px-5 border border-primary bg-white rounded text-primary font-semibold hover:bg-primary hover:text-white transition-all;
+    @apply py-2 px-5 border border-primary bg-transparent rounded text-primary font-semibold hover:bg-primary hover:text-white transition-all;
   }
 
   .btn-primary-outline--active {

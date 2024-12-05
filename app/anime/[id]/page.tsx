@@ -26,8 +26,8 @@ export default async function SinglePage({ params }: { params: Promise<{ id: str
         />
       </div>
       <div className="container-full">
-        <div className="flex gap-8">
-          <div className="relative w-[215px] aspect-[215/300] flex-none mt-[-6.25rem]">
+        <div className="flex gap-8 flex-col sm:flex-row">
+          <div className="relative w-full h-auto sm:w-[215px] sm:h-[18.75rem] aspect-[215/300] mt-8 mx-auto sm:mt-[-6.25rem]">
             <Image
               src={media.coverImage?.large ?? ""}
               alt={media.title.userPreferred ?? ""}
@@ -36,7 +36,7 @@ export default async function SinglePage({ params }: { params: Promise<{ id: str
             />
           </div>
 
-          <div className="mt-4">
+          <div className="sm:mt-4">
             <h1 className="text-2xl mb-4">{media.title.userPreferred}</h1>
 
             <div dangerouslySetInnerHTML={{ __html: media.description ?? "" }}></div>

@@ -17,7 +17,7 @@ function PageContent() {
 
   const { data, loading, error, fetchMore } = useQuery(GET_ANIMES, {
     variables: {
-      perPage: 20,
+      perPage: 12,
       sort: "ID",
       search: allParams.s === "" ? undefined : allParams.s,
       format: allParams.format === "" ? undefined : FormatMediaMap.get(allParams.format),
