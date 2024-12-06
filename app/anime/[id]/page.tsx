@@ -36,7 +36,7 @@ export default async function SinglePage({ params }: { params: Promise<{ id: str
             />
           </div>
 
-          <div className="sm:mt-4">
+          <div className="sm:mt-4 w-full">
             <h1 className="text-2xl mb-4">{media.title.userPreferred}</h1>
 
             <div dangerouslySetInnerHTML={{ __html: media.description ?? "" }}></div>
