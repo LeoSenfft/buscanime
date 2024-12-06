@@ -33,12 +33,18 @@ export default function Card({ title, categories, averageScore, imageSrc }: Card
       </div>
 
       <div className="p-5">
-        <h3 className="text-2xl text-ellipsis line-clamp-3">{title}</h3>
+        <h3 className="text-2xl text-ellipsis line-clamp-3" data-testid="card-title">
+          {title}
+        </h3>
 
         {categories && (
           <ul className="flex gap-2 flex-wrap mt-3">
             {categories.map((category) => (
-              <li key={category} className="rounded py-1 px-2 bg-primaryLight text-xs">
+              <li
+                data-testid="card-category"
+                key={category}
+                className="rounded py-1 px-2 bg-primaryLight text-xs"
+              >
                 {category}
               </li>
             ))}
@@ -47,7 +53,10 @@ export default function Card({ title, categories, averageScore, imageSrc }: Card
       </div>
 
       {averageScore && (
-        <div className={`w-fit py-1 px-2 ml-auto mt-auto rounded ${colorStyle} text-2xl`}>
+        <div
+          data-testid="card-score"
+          className={`w-fit py-1 px-2 ml-auto mt-auto rounded ${colorStyle} text-2xl`}
+        >
           {averageScore}%
         </div>
       )}

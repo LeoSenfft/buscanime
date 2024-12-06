@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/Card";
+import Card from "@/components/Card/Card";
 import { Filter } from "@/components/Search/Filter";
 import { SearchForm } from "@/components/Search/SearchForm";
 import useGetAllSearchParams from "@/hooks/useGetAllSearchParams";
