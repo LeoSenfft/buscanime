@@ -1,10 +1,10 @@
 import Card from "@/components/Card/Card";
 import { mount } from "cypress/react18";
+import { CardProps } from "@/components/Card/Card";
+import cardsData from "@/cypress/fixtures/card.json";
 
 describe("<Card />", () => {
-  const cardsData = require("@/cypress/fixtures/card.json");
-
-  cardsData.forEach((cardProps: any) => {
+  cardsData.forEach((cardProps: CardProps) => {
     it("should render and display expected content", () => {
       Cypress.Commands.add("mount", (component, options) => {
         return mount(component, options);
@@ -25,7 +25,7 @@ describe("<Card />", () => {
       //categories
       if (cardProps.categories && cardProps.categories.length > 0) {
         cy.get('[data-testid="card-category"]').each((item, index) => {
-          cy.wrap(item).should("contain.text", cardProps.categories[index]);
+          cy.wrap(item).should("contain.text", cardProps.categories![index]);
         });
       }
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-interface CardProps {
+export interface CardProps {
   title: string;
   categories?: Array<string>;
   averageScore?: number;
